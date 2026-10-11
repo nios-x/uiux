@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mountain Retreat — Redesign Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0F1B26; --ink-2:#3B4954; --muted:#5E6B76; --faint:#8A96A0;
+    --line:#E6EBEF; --surface:#F3F6F8; --page:#EAEFF3;
+    --accent:#1E5BC6; --accent-soft:#E7EFFB; --star:#E5A019;
+    --ok:#147A4B; --ok-soft:#E5F4EC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;background:#DCE3E9;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .row{display:flex;gap:56px;padding:56px;align-items:flex-start;width:max-content}
+  .phone{width:390px;height:844px;position:relative;overflow:hidden;background:var(--page);border-radius:0}
+  .phone::before{content:"";position:absolute;inset:-40px;background:url(assets/hero.jpg) center 80%/cover;filter:blur(30px) saturate(.7) brightness(1.2);opacity:.6}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+
+  /* hero */
+  .hero{position:absolute;inset:0 0 auto 0;height:250px;background:url(assets/hero.jpg) 52% 74%/150% auto no-repeat;-webkit-mask-image:linear-gradient(#000 80%,transparent);mask-image:linear-gradient(#000 80%,transparent)}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,18,28,.42) 0%,rgba(8,18,28,0) 34%,rgba(8,18,28,0) 70%,rgba(8,18,28,.18) 100%)}
+  .status{position:absolute;top:0;left:0;right:0;height:50px;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 34px;color:#fff;font-weight:600;font-size:16px;z-index:5}
+  .status .sys{display:flex;gap:6px;align-items:center}
+  .dynamic{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:122px;height:35px;border-radius:20px;background:#000;z-index:6}
+  .topbar{position:absolute;top:58px;left:16px;right:16px;display:flex;justify-content:space-between;z-index:5}
+  .glass{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;color:#fff}
+  .glass.solid{background:rgba(255,255,255,.92);color:var(--ink);border-color:transparent}
+  .topbar .r{display:flex;gap:10px}
+  .counter{position:absolute;right:26px;top:118px;z-index:5;padding:6px 12px;border-radius:999px;background:rgba(10,20,30,.45);backdrop-filter:blur(10px);color:#fff;font-size:12px;font-weight:600;letter-spacing:.02em;display:flex;gap:6px;align-items:center}
+
+  /* paper card: 80% height, inset, overlaps the photo */
+  .card{position:absolute;left:10px;right:10px;bottom:10px;height:675px;background:#fff;border-radius:32px;
+        box-shadow:0 -1px 0 rgba(255,255,255,.6) inset,0 -10px 40px rgba(12,28,44,.16),0 2px 6px rgba(12,28,44,.06);z-index:4}
+  .thumbs{position:absolute;top:-30px;left:20px;display:flex;gap:8px}
+  .thumb{width:58px;height:58px;border-radius:16px;border:3px solid #fff;background-size:cover;background-position:center;box-shadow:0 8px 18px rgba(12,28,44,.18);position:relative;overflow:hidden}
+  .thumb.on{outline:2px solid var(--ink);outline-offset:-1px}
+  .thumb.more::after{content:"+4";position:absolute;inset:0;background:rgba(10,20,30,.52);color:#fff;font-weight:600;font-size:15px;display:grid;place-items:center}
+  .save-fab{position:absolute;top:-22px;right:20px;width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(12,28,44,.16);color:var(--ink)}
+  .body{padding:46px 20px 0}
+  .eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  h1{font-size:38px;line-height:40px;margin-top:6px;letter-spacing:-.01em}
+  .loc{display:flex;align-items:center;gap:6px;margin-top:8px;color:var(--ink-2);font-size:15px}
+  .loc a{margin-left:auto;color:var(--accent);font-weight:600;font-size:14px;text-decoration:none;display:flex;align-items:center;gap:4px}
+  .rating{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--ink-2)}
+  .rating b{color:var(--ink);font-weight:600}
+  .rating u{color:var(--ink);text-underline-offset:3px;text-decoration-color:#B9C3CB}
+  .dot{width:3px;height:3px;border-radius:50%;background:#B9C3CB}
+  .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:12px}
+  .specs{margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-radius:20px;padding:14px 4px}
+  .spec{display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
+  .spec+.spec::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:1px;background:#DDE4E9}
+  .spec svg{color:var(--ink-2);margin-bottom:3px}
+  .spec .v{font-weight:600;font-size:16px}
+  .spec .l{font-size:12px;color:var(--muted)}
+  .sec{margin-top:22px;font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:baseline}
+  .hl{margin-top:12px;display:flex;flex-direction:column;gap:12px}
+  .hl .i{display:flex;gap:12px;align-items:center}
+  .ic{width:40px;height:40px;border-radius:12px;background:var(--surface);display:grid;place-items:center;color:var(--ink);flex:none}
+  .hl .t{font-size:14px;font-weight:600}
+  .hl .s{font-size:13px;color:var(--muted);margin-top:1px}
+  .about{margin-top:8px;font-size:14px;line-height:21px;color:var(--ink-2)}
+  .about a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#B9C3CB}
+
+  .bar{position:absolute;left:0;right:0;bottom:0;height:92px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px 0 20px;background:#fff;border-radius:0 0 32px 32px}
+  .price{font-size:22px;font-weight:700;letter-spacing:-.01em}
+  .price span{font-size:14px;font-weight:500;color:var(--muted)}
+  .dates{font-size:13px;color:var(--ink-2);margin-top:2px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#B9C3CB}
+  .cta{height:56px;padding:0 22px;border-radius:18px;background:var(--ink);color:#fff;font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px;box-shadow:0 10px 22px rgba(15,27,38,.22)}
+  .cta.full{width:100%;justify-content:center}
+  .home-ind{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:var(--ink);opacity:.9;z-index:9}
+
+  /* booking sheet */
+  .scrim{position:absolute;inset:0;background:rgba(8,18,28,.38);z-index:3}
+  .sheet-h{display:flex;align-items:center;justify-content:space-between;padding:24px 20px 0}
+  .sheet-h h2{font-size:30px;line-height:34px}
+  .x{width:40px;height:40px;border-radius:50%;background:var(--surface);display:grid;place-items:center}
+  .sub{margin:6px 20px 0;display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted)}
+  .sub .p{width:22px;height:22px;border-radius:6px;background:url(assets/t1.jpg) center/cover}
+  .mini{margin:14px 20px 0;display:flex;gap:12px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:18px}
+  .mini .p{width:52px;height:52px;border-radius:12px;background:url(assets/t1.jpg) center/cover}
+  .mini .t{font-weight:600;font-size:15px}
+  .mini .s{font-size:13px;color:var(--muted);margin-top:2px;display:flex;gap:6px;align-items:center}
+  .lbl{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:18px 20px 10px;display:flex;justify-content:space-between}
+  .lbl span{letter-spacing:0;text-transform:none;color:var(--ink);font-weight:600;font-size:13px}
+  .days{display:flex;gap:6px;padding:0 20px}
+  .day{flex:1;height:60px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:var(--surface);font-size:16px;font-weight:600}
+  .day small{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.04em}
+  .day.in{background:var(--accent-soft);color:var(--accent)} .day.in small{color:var(--accent)}
+  .day.end{background:var(--ink);color:#fff} .day.end small{color:#C9D3DB}
+  .day.off{color:#AEB8C0;background:#fff;border:1px dashed #DCE3E8;text-decoration:line-through}
+  .guests{margin:0 20px;border:1px solid var(--line);border-radius:18px}
+  .g{display:flex;align-items:center;justify-content:space-between;padding:11px 14px}
+  .g+.g{border-top:1px solid var(--line)}
+  .g .t{font-size:15px;font-weight:600}.g .s{font-size:12px;color:var(--muted);margin-top:1px}
+  .step{display:flex;align-items:center;gap:14px;font-weight:600;font-size:16px}
+  .sb{width:36px;height:36px;border-radius:50%;border:1px solid #CFD8DE;display:grid;place-items:center;color:var(--ink)}
+  .sb.dis{color:#BFC8CF;border-color:#E6EBEF}
+  .bd{margin:0 20px;font-size:14px;color:var(--ink-2)}
+  .bd .r{display:flex;justify-content:space-between;padding:3px 0}
+  .bd .tot{border-top:1px solid var(--line);margin-top:8px;padding-top:10px;color:var(--ink);font-weight:700;font-size:16px}
+  .note{margin:12px 20px 0;padding:10px 12px;border-radius:14px;background:var(--ok-soft);color:var(--ok);font-size:13px;font-weight:500;display:flex;gap:8px;align-items:center}
+  .sheet-cta{position:absolute;left:16px;right:16px;bottom:16px}
+  .secure{text-align:center;font-size:12px;color:var(--muted);margin-top:10px;display:flex;justify-content:center;gap:6px;align-items:center}
+
+  /* confirmation */
+  .conf{padding:28px 22px 0;text-align:center}
+  .tick{width:64px;height:64px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;margin:0 auto;color:var(--ok)}
+  .conf h2{font-size:34px;line-height:36px;margin-top:14px}
+  .conf p{color:var(--muted);font-size:15px;line-height:22px;margin-top:8px}
+  .ticket{margin:20px 20px 0;border:1px solid var(--line);border-radius:22px;overflow:hidden;text-align:left}
+  .ticket .img{height:96px;background:url(assets/hero.jpg) center 70%/cover}
+  .ticket .in{padding:14px 16px}
+  .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .tgrid .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .tgrid .v{font-size:15px;font-weight:600;margin-top:3px}
+  .perf{border-top:1px dashed #D3DBE1;margin:12px -16px 0;padding:10px 16px 0;display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+  .perf b{color:var(--ink)}
+  .btn2{height:48px;border-radius:18px;border:1px solid #CFD8DE;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;gap:8px;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="row">
+
+<!-- ============ 01 LISTING DETAIL ============ -->
+<section class="phone" id="s1">
+  <div class="hero"></div>
+  <div class="dynamic"></div>
+  <div class="status"><span>9:41</span><span class="sys" data-i="sys"></span></div>
+  <div class="topbar">
+    <div class="glass" aria-label="Back" data-i="back"></div>
+    <div class="r"><div class="glass" aria-label="Share" data-i="share"></div></div>
+  </div>
+  
+  <div class="card">
+    <div class="thumbs">
+      <div class="thumb on" style="background-image:url(assets/t1.jpg)"></div>
+      <div class="thumb" style="background-image:url(assets/t2.jpg)"></div>
+      <div class="thumb" style="background-image:url(assets/t3.jpg)"></div>
+      <div class="thumb more" style="background-image:url(assets/t4.jpg)"></div>
+    </div>
+    <div class="save-fab" aria-label="Save to wishlist" data-i="heart"></div>
+    <div class="body">
+      <div class="eyebrow">Entire cabin · Snowy Mountains</div>
+      <h1 class="serif">Mountain Retreat</h1>
+      <div class="loc"><span data-i="pin"></span>Snowy Peaks, NSW, Australia<a>Map <span data-i="arrowur"></span></a></div>
+      <div class="rating"><span data-i="star"></span><b>5.0</b><u>23 reviews</u><i class="dot"></i><span class="badge"><span data-i="award"></span>Guest favourite</span></div>
+
+      <div class="specs">
+        <div class="spec"><span data-i="users"></span><div class="v">4</div><div class="l">Guests</div></div>
+        <div class="spec"><span data-i="bed"></span><div class="v">2</div><div class="l">Bedrooms</div></div>
+        <div class="spec"><span data-i="bath"></span><div class="v">1</div><div class="l">Bathroom</div></div>
+        <div class="spec"><span data-i="car"></span><div class="v">1</div><div class="l">Parking</div></div>
+      </div>
+
+      <div class="sec">Why you'll love it</div>
+      <div class="hl">
+        <div class="i"><div class="ic" data-i="mountain"></div><div><div class="t">Views to the horizon</div><div class="s">High-altitude cabin, peaks on every side</div></div></div>
+        <div class="i"><div class="ic" data-i="fish"></div><div><div class="t">Hike &amp; fish nearby</div><div class="s">Snow trails and a river close by</div></div></div>
+        <div class="i"><div class="ic" data-i="flame"></div><div><div class="t">Warm, cosy interior</div><div class="s">Made for slow evenings after adventure</div></div></div>
+      </div>
+      <div class="about">An intimate escape into the wilderness, sleeping four, high above the valley… <a>Read more</a></div>
+    </div>
+    <div class="bar">
+      <div><div class="price">$299 <span>/ night</span></div><div class="dates">12 – 14 Dec · 2 guests</div></div>
+      <div class="cta">Book now <span data-i="arrow"></span></div>
+    </div>
+  </div>
+  <div class="home-ind"></div>
+</section>
+
+</div>
+<script src="icons.js"></script>
+<script>
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const n=el.dataset.i, sizes={sys:0,img12:14,star:16,pin:18,arrowur:14,award:13,arrow:20,heart:22,back:22,share:20,x:20,minus:16,plus:16,shield:16,lock:13,check:34,cal:20};
+    const s=sizes[n]??22;
+    el.insertAdjacentHTML('afterbegin', ICONS.svg(n, s));
+  });
+</script>
+</body>
+</html>

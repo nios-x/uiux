@@ -1,0 +1,9 @@
+{
+  "name": "Mountain Retreat Redesign Builder",
+  "id": "mountain-retreat-redesign-dd26",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": { "allowedDomains": ["none"] }
+}

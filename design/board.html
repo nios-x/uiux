@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mountain Retreat — Design Decode ’26 Board</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0F1B26;--ink-2:#3B4954;--muted:#5E6B76;--line:#E1E7EC;--surface:#F3F6F8;--accent:#1E5BC6;--accent-soft:#E7EFFB;--bad:#D23B2E;--bad-soft:#FCEBE9;--ok:#147A4B;--ok-soft:#E5F4EC}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+  .board{width:1920px;padding:80px 96px;background:#F7F9FA;position:relative}
+  .serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
+  .eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  h1{font-size:84px;line-height:88px;letter-spacing:-.015em;margin-top:14px}
+  h1 i{color:var(--accent)}
+  .lede{font-size:20px;line-height:30px;color:var(--ink-2);max-width:820px;margin-top:18px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end}
+  .meta{display:flex;gap:40px;font-size:14px;color:var(--muted)}
+  .meta b{display:block;color:var(--ink);font-size:16px;margin-top:4px;font-weight:600}
+  .grid{display:grid;grid-template-columns:420px 1fr 420px;gap:56px;margin-top:64px;align-items:start}
+  .phonewrap{position:relative;border-radius:44px;padding:10px;background:#0F1B26;box-shadow:0 30px 60px rgba(15,27,38,.18)}
+  .phonewrap img{display:block;width:400px;border-radius:34px}
+  .tag{position:absolute;top:-40px;left:0;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .tag.b{color:var(--bad)} .tag.a{color:var(--ok)}
+  .pin{position:absolute;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center;box-shadow:0 0 0 4px rgba(255,255,255,.9),0 6px 14px rgba(0,0,0,.25)}
+  .pin.b{background:var(--bad)} .pin.a{background:var(--ok)}
+  .pairs{display:flex;flex-direction:column;gap:14px}
+  .pairs .hdr{display:grid;grid-template-columns:44px 1fr 1fr;gap:16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:0 0 4px}
+  .pair{display:grid;grid-template-columns:44px 1fr 1fr;gap:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;align-items:start}
+  .n{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+  .p h4{font-size:16px;font-weight:600;line-height:22px}
+  .p p{font-size:14px;line-height:20px;color:var(--ink-2);margin-top:3px}
+  .p .k{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:8px;display:inline-block;padding:3px 8px;border-radius:6px}
+  .bad h4{color:#9A2A20} .bad .k{background:var(--bad-soft);color:#9A2A20}
+  .good h4{color:var(--ink)} .good .k{background:var(--ok-soft);color:var(--ok)}
+  /* board 2 */
+  .flow{display:flex;gap:40px;align-items:flex-start;margin-top:60px}
+  .step{display:flex;flex-direction:column;gap:18px}
+  .step .cap{font-size:14px;color:var(--muted);max-width:330px;line-height:20px}
+  .step .cap b{display:block;color:var(--ink);font-size:18px;margin-bottom:4px;font-weight:600}
+  .step .phonewrap img{width:330px}
+  .arrow{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);font-size:13px;font-weight:600;text-align:center;width:120px;margin-top:330px}
+  .arrow .ln{width:100%;height:2px;background:repeating-linear-gradient(90deg,var(--ink) 0 8px,transparent 8px 14px);position:relative}
+  .arrow .ln::after{content:"";position:absolute;right:-2px;top:-5px;border:6px solid transparent;border-left:9px solid var(--ink)}
+  .sys{display:grid;grid-template-columns:420px 1fr 1fr;grid-template-rows:auto auto;gap:28px;margin-top:64px;align-items:start}
+  .sys .ph{grid-row:1 / span 2}
+  .sys .wide{grid-column:2 / span 2}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px}
+  .panel h3{font-size:30px;margin-bottom:18px}
+  .sw{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .chip{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+  .chip .c{height:70px}
+  .chip .t{padding:10px 12px;font-size:12px;line-height:17px;color:var(--muted)}
+  .chip .t b{color:var(--ink);display:block;font-size:13px}
+  .aa{display:inline-block;margin-top:4px;font-size:11px;font-weight:700;color:var(--ok);background:var(--ok-soft);padding:2px 6px;border-radius:5px}
+  .type .r{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding:10px 0}
+  .type .r:last-child{border:0}
+  .type small{font-size:12px;color:var(--muted)}
+  .princ li{list-style:none;display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:20px;color:var(--ink-2)}
+  .princ li:last-child{border:0}
+  .princ li b{color:var(--ink);display:block;font-size:15px}
+  .princ .d{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:7px;flex:none}
+  .foot{margin-top:56px;display:flex;justify-content:space-between;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:22px}
+</style>
+</head>
+<body>
+
+<!-- ======================= BOARD 1 : PROBLEM → SOLUTION ======================= -->
+<section class="board" id="b1">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Design Decode ’26 · Redesign challenge</div>
+      <h1 class="serif">Mountain Retreat — from <i>loud</i><br>to lucid.</h1>
+      <p class="lede">The original screen shouts everything at once: eight colours, five fonts and a box around every fact. The redesign keeps every piece of content and both actions, but gives the page one clear reading order: photo → identity → trust → facts → story → book.</p>
+    </div>
+    <div class="meta"><div>Platform<b>iOS · 390 × 844</b></div><div>Theme<b>Minimal · Cool</b></div><div>Scope<b>1 screen · listing detail</b></div></div>
+  </div>
+
+  <div class="grid">
+    <div style="position:relative;margin-top:44px">
+      <span class="tag b">Before</span>
+      <div class="phonewrap"><img src="assets/original.jpg" alt="Original"></div>
+      <!-- pins: original 720x1280 shown at 400x711 (+10 frame) → scale .5556 -->
+      <span class="pin b" style="left:20px;top:22px">8</span>
+      <span class="pin b" style="left:378px;top:238px">1</span>
+      <span class="pin b" style="left:362px;top:283px">2</span>
+      <span class="pin b" style="left:392px;top:323px">3</span>
+      <span class="pin b" style="left:392px;top:392px">4</span>
+      <span class="pin b" style="left:392px;top:490px">5</span>
+      <span class="pin b" style="left:392px;top:596px">6</span>
+      <span class="pin b" style="left:392px;top:668px">7</span>
+    </div>
+
+    <div class="pairs">
+      <div class="hdr"><span></span><span>Problem found</span><span>Solution applied</span></div>
+      <div class="pair"><div class="n">1</div>
+        <div class="p bad"><h4>Every element is shouting</h4><p>Red-on-yellow title, five tinted boxes, and gradients that all fight for attention. There is no focal point.</p><span class="k">Hierarchy</span></div>
+        <div class="p good"><h4>One focal point, then quiet</h4><p>A 38 pt editorial serif title is the only loud element. Everything else uses one neutral ink scale on white paper.</p><span class="k">Hierarchy · Typography</span></div></div>
+      <div class="pair"><div class="n">2</div>
+        <div class="p bad"><h4>The location reads like a button</h4><p>An all-caps pink pill looks tappable but does nothing. All caps also slows reading.</p><span class="k">Affordance</span></div>
+        <div class="p good"><h4>Plain text plus a real Map link</h4><p>The location is set in sentence case with a pin icon. The only tappable part is the blue “Map ↗” link.</p><span class="k">Interaction logic</span></div></div>
+      <div class="pair"><div class="n">3</div>
+        <div class="p bad"><h4>Five huge stars for one number</h4><p>Five large stars take a whole row just to say 5.0, and “reviews” is underlined purple like a web link.</p><span class="k">Efficiency</span></div>
+        <div class="p good"><h4>A compact trust line</h4><p>★ 5.0 · 23 reviews (tappable) · Guest favourite badge. Social proof fits on one scannable line.</p><span class="k">Clarity</span></div></div>
+      <div class="pair"><div class="n">4</div>
+        <div class="p bad"><h4>Numbers with no meaning</h4><p>“2, 1, 1” sits under icons with no labels, so users have to guess. Each tile also uses a different colour.</p><span class="k">Accessibility</span></div>
+        <div class="p good"><h4>Labelled facts in one group</h4><p>Each fact has an icon, a value and a label. “Sleeps 4”, which was hidden in the paragraph, becomes the first fact users see.</p><span class="k">Clarity · Recognition</span></div></div>
+      <div class="pair"><div class="n">5</div>
+        <div class="p bad"><h4>A wall of text, said twice</h4><p>Two paragraphs repeat “cozy” and the setting. The key selling points are buried in prose.</p><span class="k">Scannability</span></div>
+        <div class="p good"><h4>“Why you’ll love it” highlights</h4><p>The prose becomes three icon highlights (views, hike &amp; fish, cosy interior), followed by one short paragraph with “Read more”.</p><span class="k">Content design</span></div></div>
+      <div class="pair"><div class="n">6</div>
+        <div class="p bad"><h4>Contrast fails</h4><p>The grey text on lavender is about 2.4:1 and the yellow stars on yellow about 1.3:1, both below WCAG AA.</p><span class="k">Accessibility</span></div>
+        <div class="p good"><h4>All body text passes AA</h4><p>Ink is 17.4:1, body text 9.3:1 and muted text 5.5:1. Nothing relies on colour alone, and every tap target is at least 44 pt.</p><span class="k">WCAG 2.2 AA</span></div></div>
+      <div class="pair"><div class="n">7</div>
+        <div class="p bad"><h4>Two competing CTAs</h4><p>A neon-green button and a hot-pink price look equally important. The price has no dates or context.</p><span class="k">User flow</span></div>
+        <div class="p good"><h4>One sticky action with context</h4><p>The price, chosen dates and guests sit on the left of a single dark “Book now” button, which opens a booking sheet.</p><span class="k">Flow · Fitts’ law</span></div></div>
+      <div class="pair"><div class="n">8</div>
+        <div class="p bad"><h4>A red back button and a tiny counter</h4><p>The back button uses the colour for error/destructive actions. “1/8” is the only hint that more photos exist.</p><span class="k">Consistency</span></div>
+        <div class="p good"><h4>Glass controls and a visible gallery</h4><p>Neutral glass back and share buttons sit on the photo. Thumbnails overlap the card with a “+4” tile, and Save is a floating heart.</p><span class="k">Discoverability</span></div></div>
+    </div>
+
+    <div style="position:relative;margin-top:44px">
+      <span class="tag a">After</span>
+      <div class="phonewrap"><img src="export/s1.png" alt="Redesign"></div>
+      <!-- s1 390x844 shown at 400x866 (+10) → scale 1.0256 -->
+      <span class="pin a" style="left:30px;top:150px">8</span>
+      <span class="pin a" style="left:392px;top:252px">1</span>
+      <span class="pin a" style="left:392px;top:292px">2</span>
+      <span class="pin a" style="left:392px;top:330px">3</span>
+      <span class="pin a" style="left:392px;top:400px">4</span>
+      <span class="pin a" style="left:392px;top:540px">5</span>
+      <span class="pin a" style="left:392px;top:690px">6</span>
+      <span class="pin a" style="left:392px;top:810px">7</span>
+    </div>
+  </div>
+  <div class="foot"><span>Design Decode ’26 · UI/UX Design Division · Cyber Labs, IIT (ISM) Dhanbad</span><span>Board 1 of 2 · Problem → Solution</span></div>
+</section>
+
+<!-- ======================= BOARD 2 : FLOW + SYSTEM ======================= -->
+<section class="board" id="b2">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Design system · Rationale</div>
+      <h1 class="serif">One screen, one <i>quiet</i> system.</h1>
+      <p class="lede">Every colour, size and radius on the screen comes from a small set of tokens. That keeps the page consistent, keeps it accessible by default, and makes it easy to extend to the booking flow that “Book now” opens.</p>
+    </div>
+  </div>
+
+  <div class="sys">
+    <div class="ph"><div class="phonewrap"><img src="export/s1.png" alt="Redesigned listing screen"></div></div>
+    <div class="panel">
+      <h3 class="serif">Colour · Glacier neutrals</h3>
+      <div class="sw">
+        <div class="chip"><div class="c" style="background:#0F1B26"></div><div class="t"><b>Ink</b>#0F1B26<br><span class="aa">17.4 : 1 AAA</span></div></div>
+        <div class="chip"><div class="c" style="background:#3B4954"></div><div class="t"><b>Ink 2</b>#3B4954<br><span class="aa">9.3 : 1 AAA</span></div></div>
+        <div class="chip"><div class="c" style="background:#5E6B76"></div><div class="t"><b>Muted</b>#5E6B76<br><span class="aa">5.5 : 1 AA</span></div></div>
+        <div class="chip"><div class="c" style="background:#1E5BC6"></div><div class="t"><b>Glacier</b>#1E5BC6<br><span class="aa">6.2 : 1 AA</span></div></div>
+        <div class="chip"><div class="c" style="background:#F3F6F8"></div><div class="t"><b>Surface</b>#F3F6F8</div></div>
+        <div class="chip"><div class="c" style="background:#E6EBEF"></div><div class="t"><b>Line</b>#E6EBEF</div></div>
+        <div class="chip"><div class="c" style="background:#E7EFFB"></div><div class="t"><b>Glacier soft</b>#E7EFFB</div></div>
+        <div class="chip"><div class="c" style="background:#E5A019"></div><div class="t"><b>Star</b>#E5A019<br>Decorative · always with a number</div></div>
+      </div>
+    </div>
+    <div class="panel type">
+      <h3 class="serif">Type · Two families</h3>
+      <div class="r"><span class="serif" style="font-size:38px">Mountain Retreat</span><small>Instrument Serif 38/40</small></div>
+            <div class="r"><span style="font-size:22px;font-weight:700">$299</span><small>Inter Bold 22</small></div>
+      <div class="r"><span style="font-size:15px;font-weight:600">Why you’ll love it</span><small>Inter Semibold 15</small></div>
+      <div class="r"><span style="font-size:14px;color:var(--ink-2)">Body copy at a 21 px line height</span><small>Inter Regular 14/21</small></div>
+      <div class="r"><span style="font-size:12px;letter-spacing:.09em;font-weight:600;color:var(--muted)">EYEBROW LABEL</span><small>Inter Semibold 12 · +9%</small></div>
+    </div>
+    <div class="panel wide">
+      <h3 class="serif">System rules</h3>
+      <ul class="princ" style="columns:2;column-gap:32px">
+        <li><span class="d"></span><div><b>Paper card · 80% height</b>The card is inset 10 pt with a 32 pt radius and one shadow. The photo stays visible above it, and the thumbnails break out of its edge.</div></li>
+        <li><span class="d"></span><div><b>4-pt spacing grid</b>Spacing steps are 4, 8, 12, 16, 20 and 24 pt. Radii are 12 (icons), 16 (inputs), 18 (buttons), 20 (groups) and 32 (card).</div></li>
+        <li><span class="d"></span><div><b>One primary action per screen</b>It is always dark ink, at least 56 pt tall, and placed in the bottom thumb zone.</div></li>
+        <li><span class="d"></span><div><b>Accent means interactive</b>Glacier blue is used only for links and selected states, never for decoration.</div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Icons: Lucide (ISC licence) · Photo: from the original brief</span><span>Board 2 of 2 · Design system</span></div>
+</section>
+</body>
+</html>
