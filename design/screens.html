@@ -37,7 +37,7 @@
   .thumbs{position:absolute;top:-30px;left:20px;display:flex;gap:8px}
   .thumb{width:58px;height:58px;border-radius:16px;border:3px solid #fff;background-size:cover;background-position:center;box-shadow:0 8px 18px rgba(12,28,44,.18);position:relative;overflow:hidden}
   .thumb.on{outline:2px solid var(--ink);outline-offset:-1px}
-  .thumb.more::after{content:"+4";position:absolute;inset:0;background:rgba(10,20,30,.52);color:#fff;font-weight:600;font-size:15px;display:grid;place-items:center}
+  .thumb .ov{position:absolute;inset:0;border-radius:13px;background:rgba(10,20,30,.52);color:#fff;font-weight:600;font-size:15px;display:grid;place-items:center}
   .save-fab{position:absolute;top:-22px;right:20px;width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 8px 20px rgba(12,28,44,.16);color:var(--ink)}
   .body{padding:46px 20px 0}
   .eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
@@ -51,7 +51,7 @@
   .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:12px}
   .specs{margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-radius:20px;padding:14px 4px}
   .spec{display:flex;flex-direction:column;align-items:center;gap:3px;position:relative}
-  .spec+.spec::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:1px;background:#DDE4E9}
+  .spec .div{position:absolute;left:0;top:8px;bottom:8px;width:1px;background:#DDE4E9}
   .spec svg{color:var(--ink-2);margin-bottom:3px}
   .spec .v{font-weight:600;font-size:16px}
   .spec .l{font-size:12px;color:var(--muted)}
@@ -139,7 +139,7 @@
       <div class="thumb on" style="background-image:url(assets/t1.jpg)"></div>
       <div class="thumb" style="background-image:url(assets/t2.jpg)"></div>
       <div class="thumb" style="background-image:url(assets/t3.jpg)"></div>
-      <div class="thumb more" style="background-image:url(assets/t4.jpg)"></div>
+      <div class="thumb more" style="background-image:url(assets/t4.jpg)"><div class="ov">+4</div></div>
     </div>
     <div class="save-fab" aria-label="Save to wishlist" data-i="heart"></div>
     <div class="body">
@@ -150,9 +150,9 @@
 
       <div class="specs">
         <div class="spec"><span data-i="users"></span><div class="v">4</div><div class="l">Guests</div></div>
-        <div class="spec"><span data-i="bed"></span><div class="v">2</div><div class="l">Bedrooms</div></div>
-        <div class="spec"><span data-i="bath"></span><div class="v">1</div><div class="l">Bathroom</div></div>
-        <div class="spec"><span data-i="car"></span><div class="v">1</div><div class="l">Parking</div></div>
+        <div class="spec"><i class="div"></i><span data-i="bed"></span><div class="v">2</div><div class="l">Bedrooms</div></div>
+        <div class="spec"><i class="div"></i><span data-i="bath"></span><div class="v">1</div><div class="l">Bathroom</div></div>
+        <div class="spec"><i class="div"></i><span data-i="car"></span><div class="v">1</div><div class="l">Parking</div></div>
       </div>
 
       <div class="sec">Why you'll love it</div>

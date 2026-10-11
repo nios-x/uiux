@@ -8,9 +8,18 @@ A single-screen redesign of the listing-detail screen, in a minimal, cool style.
 | Presentation boards (PNG) | `design/export/board-b1.png` (problem → solution), `design/export/board-b2.png` (design system) |
 | Submission PDF (screen + boards) | `design/export/Mountain-Retreat-Redesign.pdf` |
 | UX write-up | `design/UX-writeup.md` · `design/export/Mountain-Retreat-UX-Writeup.pdf` |
-| Figma builder plugin | `design/figma-plugin/` |
+| Editable screen for Figma (SVG) | `design/export/Mountain-Retreat-screen.svg` |
+| Figma builder plugin (desktop app) | `design/figma-plugin/` |
 
-## Get it into Figma (editable layers)
+## Get it into Figma in the browser (no app needed)
+1. Open the Figma file in your browser.
+2. Drag `design/export/Mountain-Retreat-screen.svg` onto the canvas. It imports as editable layers: text you can edit, vector shapes and icons, with the photo as one background image.
+3. Drag `design/export/board-b1.png` and `design/export/board-b2.png` next to it.
+4. Click **Share**, then set **Anyone with the link → can view**, and copy the link.
+
+To regenerate the SVG after changing `screens.html`, run `node design/tools/html2svg.js` from `design/`.
+
+## Alternative: Figma desktop plugin (adds components, variables and text styles)
 1. Open the Figma **desktop app** and your file.
 2. Go to **Plugins → Development → Import plugin from manifest…** and pick `design/figma-plugin/manifest.json`.
 3. Run **Plugins → Development → Mountain Retreat Redesign Builder**.
